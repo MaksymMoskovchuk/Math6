@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тренувальне завдання</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Реєстрація користувача</h1>
+
+<form id="registrationForm">
+    <label for="firstName">Ім'я:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="lastName">Прізвище:</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+
+    <label for="email">Електронна пошта:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <input type="submit" value="Зареєструватися">
+</form>
+
+<hr>
+
+<h2>Обчислення суми двох чисел</h2>
+
+<form id="sumForm" style="display: none;">
+    <label for="number1">Число 1:</label>
+    <input type="number" id="number1" name="number1" required><br><br>
+
+    <label for="number2">Число 2:</label>
+    <input type="number" id="number2" name="number2" required><br><br>
+
+    <input type="button" value="Обчислити суму" onclick="calculateSum()">
+    <br><br>
+    <label for="sumResult">Результат обчислення:</label>
+    <span id="sumResult"></span>
+    <br><br>
+    <button onclick="sendSumByEmail()">Надіслати результат обчислення на пошту</button>
+</form>
+
+<script>
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+    
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    // Here you can perform validation or send the data to a server for further processing
+    // For simplicity, let's just log the data to the console
+    console.log("Ім'я: " + firstName);
+    console.log("Прізвище: " + lastName);
+    console.log("Електронна пошта: " + email);
+    console.log("Пароль: " + password);
+
+    // Optionally, you can show the sum form after successful registration
+    document.getElementById("registrationForm").style.display = "none";
+    document.getElementById("sumForm").style.display = "block";
+});
+
+function calculateSum() {
+    var number1 = parseFloat(document.getElementById("number1").value);
+    var number2 = parseFloat(document.getElementById("number2").value);
+    var sum = number1 + number2;
+    
+    // Display the sum
+    document.getElementById("sumResult").innerText = "Сума чисел: " + sum;
+}
+
+function sendSumByEmail() {
+    var email = document.getElementById("email").value;
+    var sumResult = document.getElementById("sumResult").innerText;
+
+    // Open default email client with pre-filled email
+    window.location.href = "mailto:" + email + "?subject=Результати обчислення суми&body=" + encodeURIComponent(sumResult);
+}
+</script>
+
+</body>
+</html>
